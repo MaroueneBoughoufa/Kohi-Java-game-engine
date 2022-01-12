@@ -36,11 +36,12 @@ public class Window {
     }
 
     public void run() {
-        System.out.println("Hello LWJGL " + Version.getVersion() + "!");
+        System.out.println("Hello LWJGL " + Version.getVersion() + "! \nThis is a test for the Kohi java game engine");
 
         init();
-        loop();// Free the window callbacks and destroy the window
+        loop();
 
+        // Free the window callbacks and destroy the window
         glfwFreeCallbacks(glfwWindow);
         glfwDestroyWindow(glfwWindow);
 
