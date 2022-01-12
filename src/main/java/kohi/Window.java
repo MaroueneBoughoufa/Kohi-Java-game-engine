@@ -5,6 +5,7 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
+import util.Time;
 
 import java.nio.IntBuffer;
 
@@ -19,12 +20,30 @@ public class Window {
     private String title;
     private long glfwWindow;
 
+    public float r,g,b,a;
+
     private static Window window = null;
 
+    private static Scene currentScene;
+
     private Window() {
-        this.width = 1920;
-        this.height = 1080;
+        this.width = 1366;
+        this.height = 768;
         this.title = "Test";
+        r = 1.0f;
+        g = 1.0f;
+        b = 1.0f;
+        a = 1.0f;
+    }
+
+    public static void changeScene(int newScene) {
+        switch (newScene) {
+            case 0 -> currentScene = new Editor();
+            case 1 -> currentScene = new LevelScene();
+            default -> {
+                assert false: "Unknown scene '" + newScene + "'";
+            }
+        }
     }
 
     public static Window get() {
@@ -36,7 +55,7 @@ public class Window {
     }
 
     public void run() {
-        System.out.println("Hello LWJGL " + Version.getVersion() + "! \nThis is a test for the Kohi java game engine");
+        System.out.println("Hello LWJGL " + Version.getVersion() + "! \nThis is a test for the Kohi java game engine.");
 
         init();
         loop();
@@ -63,13 +82,19 @@ public class Window {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+        glfwWindowHint(GLFW_MAXIMIZED, GLFW_FALSE);
 
         // Create the window
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
         if (glfwWindow == NULL) {
             throw new IllegalStateException("Failed to create the GLFW window.");
         }
+        
+        // Set the event callbacks
+        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback);
+        glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
+        glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
+        glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
 
         try ( MemoryStack stack = stackPush() ) {
             IntBuffer pWidth = stack.mallocInt(1); // int*
@@ -98,6 +123,8 @@ public class Window {
 
         // Make the window visible
         glfwShowWindow(glfwWindow);
+
+        Window.changeScene(0);
     }
 
     public void loop() {
@@ -108,7 +135,11 @@ public class Window {
         // bindings available for use.
         GL.createCapabilities();
 
-        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(r, g, b, a);
+
+        float beginTime = Time.getTime();
+        float endTime;
+        float dt = -1.0f;
 
         while (!glfwWindowShouldClose(glfwWindow)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
@@ -116,7 +147,15 @@ public class Window {
             // Poll events
             glfwPollEvents();
 
+            if (dt >= 0) {
+                currentScene.update(dt);
+            }
+
             glfwSwapBuffers(glfwWindow);
+
+            endTime = Time.getTime();
+            dt = endTime - beginTime;
+            beginTime = endTime;
         }
     }
 }
