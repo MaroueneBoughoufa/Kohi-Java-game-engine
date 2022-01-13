@@ -1,6 +1,6 @@
 package kohi;
 
-import java.awt.event.KeyEvent;
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Editor extends Scene{
     private boolean changingScene = false;
@@ -12,7 +12,7 @@ public class Editor extends Scene{
 
     @Override
     public void update(double dt) {
-        if (!changingScene && KeyListener.isKeyPressed(KeyEvent.VK_SPACE)) {
+        if (!changingScene && KeyListener.isKeyPressed(GLFW_KEY_SPACE)) {
             changingScene = true;
         }
 
