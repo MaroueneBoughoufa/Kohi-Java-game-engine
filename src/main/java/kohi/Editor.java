@@ -39,18 +39,14 @@ public class Editor extends Scene {
 
     private float[] vertexArray = {
             // position               // color
-            0.5f, -0.5f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f, // Bottom right 0
+             0.5f, -0.5f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f, // Bottom right 0
             -0.5f,  0.5f, 0.0f,       0.0f, 1.0f, 0.0f, 1.0f, // Top left     1
-            0.5f,  0.5f, 0.0f ,      1.0f, 0.0f, 1.0f, 1.0f, // Top right    2
+             0.5f,  0.5f, 0.0f,       1.0f, 0.0f, 1.0f, 1.0f, // Top right    2
             -0.5f, -0.5f, 0.0f,       1.0f, 1.0f, 0.0f, 1.0f, // Bottom left  3
     };
 
     // IMPORTANT: Must be in counter-clockwise order
     private int[] elementArray = {
-            /*
-                    x        x
-                    x        x
-             */
             2, 1, 0, // Top right triangle
             0, 1, 3 // bottom left triangle
     };
@@ -168,5 +164,4 @@ public class Editor extends Scene {
 
         glUseProgram(0);
     }
-
 }
