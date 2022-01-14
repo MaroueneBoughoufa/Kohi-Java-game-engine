@@ -3,5 +3,7 @@ package kohi;
 public abstract class Scene {
     public Scene() {}
 
-    public abstract void update(double dt);
+    public void init() {}
+
+    public abstract void update(float dt);
 }

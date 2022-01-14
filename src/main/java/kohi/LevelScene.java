@@ -5,6 +5,6 @@ public class LevelScene extends Scene{
     }
 
     @Override
-    public void update(double dt) {
+    public void update(float dt) {
     }
 }
