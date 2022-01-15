@@ -1,7 +1,10 @@
 package kohi;
 
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import renderer.Shader;
+import renderer.Texture;
+import util.Time;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -12,11 +15,11 @@ import static org.lwjgl.opengl.GL30.*;
 public class Editor extends Scene {
 
     private float[] vertexArray = {
-            // position               // color
-             0.5f, -0.5f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f, // Bottom right 0
-            -0.5f,  0.5f, 0.0f,       0.0f, 1.0f, 0.0f, 1.0f, // Top left     1
-             0.5f,  0.5f, 0.0f,       1.0f, 0.0f, 1.0f, 1.0f, // Top right    2
-            -0.5f, -0.5f, 0.0f,       1.0f, 1.0f, 0.0f, 1.0f, // Bottom left  3
+            // position                 // color                       // UV coordinates
+            300.0f, 200.0f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f,        1, 1, // Bottom right 0
+            200.0f, 300.0f, 0.0f,       0.0f, 1.0f, 0.0f, 1.0f,        0, 0, // Top left     1
+            300.0f, 300.0f, 0.0f,       1.0f, 0.0f, 1.0f, 1.0f,        1, 0, // Top right    2
+            200.0f, 200.0f, 0.0f,       1.0f, 1.0f, 0.0f, 1.0f,        0, 1, // Bottom left  3
     };
 
     // IMPORTANT: Must be in counter-clockwise order
@@ -28,13 +31,18 @@ public class Editor extends Scene {
     private int vaoID, vboID, eboID;
 
     private Shader defaultShader;
+    private Texture testTexture;
 
-    public Editor() {}
+    GameObject testObj;
 
     @Override
     public void init() {
+        this.testObj = new GameObject("Test");
+
+        this.camera = new Camera(new Vector2f());
         defaultShader = new Shader("assets/shaders/default.glsl");
         defaultShader.compile();
+        this.testTexture = new Texture("assets/images/itchio-profile.jpg");
 
         // ============================================================
         // Generate VAO, VBO, and EBO buffer objects, and send to GPU
@@ -62,18 +70,31 @@ public class Editor extends Scene {
         // Add the vertex attribute pointers
         int positionsSize = 3;
         int colorSize = 4;
-        int floatSizeBytes = 4;
-        int vertexSizeBytes = (positionsSize + colorSize) * floatSizeBytes;
+        int UVSize = 2;
+        int vertexSizeBytes = (positionsSize + colorSize + UVSize) * Float.BYTES;
+
         glVertexAttribPointer(0, positionsSize, GL_FLOAT, false, vertexSizeBytes, 0);
         glEnableVertexAttribArray(0);
 
-        glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeBytes, positionsSize * floatSizeBytes);
+        glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeBytes, positionsSize * Float.BYTES);
         glEnableVertexAttribArray(1);
+
+        glVertexAttribPointer(2, UVSize, GL_FLOAT, false, vertexSizeBytes, (positionsSize + colorSize) * Float.BYTES);
+        glEnableVertexAttribArray(2);
     }
 
     @Override
     public void update(float dt) {
-        defaultShader.use();
+        //camera.position.x -= dt * 50.0f;
+
+        defaultShader.uploadTexture("TEX_SAMPLER", 0);
+        glActiveTexture(GL_TEXTURE0);
+        testTexture.bind();
+
+        defaultShader.uploadMat4f("uProjMat", camera.getProjectionMatrix());
+        defaultShader.uploadMat4f("uViewMat", camera.getViewMatrix());
+        defaultShader.uploadFloat("uTime", (Time.getTime())*2.0f);
+
         // Bind the VAO that we're using
         glBindVertexArray(vaoID);
 
