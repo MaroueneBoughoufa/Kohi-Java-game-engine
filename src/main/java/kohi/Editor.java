@@ -11,7 +11,6 @@ import static org.lwjgl.opengl.GL30.*;
 
 public class Editor extends Scene {
 
-
     private float[] vertexArray = {
             // position               // color
              0.5f, -0.5f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f, // Bottom right 0
@@ -23,16 +22,14 @@ public class Editor extends Scene {
     // IMPORTANT: Must be in counter-clockwise order
     private int[] elementArray = {
             2, 1, 0, // Top right triangle
-            0, 1, 3 // bottom left triangle
+            0, 1, 3  // bottom left triangle
     };
 
     private int vaoID, vboID, eboID;
 
     private Shader defaultShader;
 
-    public Editor() {
-
-    }
+    public Editor() {}
 
     @Override
     public void init() {
