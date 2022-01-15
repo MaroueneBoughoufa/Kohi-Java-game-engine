@@ -27,8 +27,8 @@ public class Window {
     private static Scene currentScene;
 
     private Window() {
-        this.width = 1366;
-        this.height = 768;
+        this.width = 1920;
+        this.height = 1080;
         this.title = "Test";
         r = 1.0f;
         g = 1.0f;
@@ -41,10 +41,12 @@ public class Window {
             case 0 -> {
                 currentScene = new Editor();
                 currentScene.init();
+                currentScene.start();
             }
             case 1 -> {
                 currentScene = new LevelScene();
                 currentScene.init();
+                currentScene.start();
             }
             default -> {
                 assert false: "Unknown scene '" + newScene + "'";
