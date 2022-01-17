@@ -37,8 +37,6 @@ void main()
     // With image:
     //color = texture(TEX_SAMPLER, fUV);
 
-    color = sin(uTime) * texture(TEX_SAMPLER, fUV);
-
     // Black and white:
     //float avg = (fColor.r + fColor.g + fColor.b) / 3;
     //color = vec4(avg, avg, avg, 1);
@@ -49,4 +47,11 @@ void main()
     // Noise:
     //float noise = fract(sin(dot(fColor.xy, vec2(12.9898, 78.233))) * 43758.5453);
     //color = fColor * noise;
+
+    // Blinking Texture
+    color = sin(uTime) * texture(TEX_SAMPLER, fUV);
+
+    // Noise texture (not really)
+    //float noise = fract(sin(dot(fColor.xy, vec2(12.9898, 78.233))) * 43758.5453);
+    //color = texture(TEX_SAMPLER, fUV) * noise;
 }
