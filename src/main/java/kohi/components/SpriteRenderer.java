@@ -1,4 +1,4 @@
-package components;
+package kohi.components;
 
 import kohi.Component;
 
