@@ -1,6 +1,9 @@
-package kohi;
+package kohi.scenes;
 
-import components.Sprite;
+import kohi.components.SpriteRenderer;
+import kohi.Camera;
+import kohi.GameObject;
+import kohi.Scene;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import renderer.Shader;
@@ -42,7 +45,7 @@ public class Editor extends Scene {
     public void init() {
         this.testObj = new GameObject("test");
         System.out.println("Creating object '"+ testObj.name +"'");
-        this.testObj.addComponent(new Sprite());
+        this.testObj.addComponent(new SpriteRenderer());
         this.addGameObject(testObj);
 
         this.camera = new Camera(new Vector2f());
@@ -122,7 +125,7 @@ public class Editor extends Scene {
         if (firstTime) {
             GameObject test2 = new GameObject("test2");
             System.out.println("Creating object '" + test2.name + "'");
-            test2.addComponent(new Sprite());
+            test2.addComponent(new SpriteRenderer());
             this.addGameObject(test2);
             firstTime = false;
         }

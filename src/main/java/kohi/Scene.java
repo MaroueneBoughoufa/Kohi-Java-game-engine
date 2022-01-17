@@ -1,5 +1,8 @@
 package kohi;
 
+import kohi.Camera;
+import kohi.GameObject;
+
 import java.util.ArrayList;
 import java.util.List;
 

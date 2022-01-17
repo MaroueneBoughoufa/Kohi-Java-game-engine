@@ -2,10 +2,10 @@ package kohi.components;
 
 import kohi.Component;
 
-public class Font extends Component {
+public class FontRenderer extends Component {
     @Override
     public void start() {
-        if (gameObject.getComponent(Sprite.class) != null) {
+        if (gameObject.getComponent(SpriteRenderer.class) != null) {
             System.out.println("Found font-renderer.");
         }
     }
