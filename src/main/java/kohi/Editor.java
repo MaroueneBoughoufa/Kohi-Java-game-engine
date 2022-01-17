@@ -1,5 +1,6 @@
 package kohi;
 
+import components.Sprite;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import renderer.Shader;
@@ -33,11 +34,16 @@ public class Editor extends Scene {
     private Shader defaultShader;
     private Texture testTexture;
 
+    boolean firstTime = true;
+
     GameObject testObj;
 
     @Override
     public void init() {
-        this.testObj = new GameObject("Test");
+        this.testObj = new GameObject("test");
+        System.out.println("Creating object '"+ testObj.name +"'");
+        this.testObj.addComponent(new Sprite());
+        this.addGameObject(testObj);
 
         this.camera = new Camera(new Vector2f());
         defaultShader = new Shader("assets/shaders/default.glsl");
@@ -85,6 +91,7 @@ public class Editor extends Scene {
 
     @Override
     public void update(float dt) {
+        // Moves the square
         //camera.position.x -= dt * 50.0f;
 
         defaultShader.uploadTexture("TEX_SAMPLER", 0);
@@ -111,5 +118,17 @@ public class Editor extends Scene {
         glBindVertexArray(0);
 
         defaultShader.detach();
+
+        if (firstTime) {
+            GameObject test2 = new GameObject("test2");
+            System.out.println("Creating object '" + test2.name + "'");
+            test2.addComponent(new Sprite());
+            this.addGameObject(test2);
+            firstTime = false;
+        }
+
+        for (GameObject g: gameObjects) {
+            g.update(dt);
+        }
     }
 }
