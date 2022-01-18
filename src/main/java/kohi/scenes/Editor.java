@@ -37,16 +37,8 @@ public class Editor extends Scene {
     private Shader defaultShader;
     private Texture testTexture;
 
-    boolean firstTime = true;
-
-    GameObject testObj;
-
     @Override
     public void init() {
-        this.testObj = new GameObject("test");
-        System.out.println("Creating object '"+ testObj.name +"'");
-        this.testObj.addComponent(new SpriteRenderer());
-        this.addGameObject(testObj);
 
         this.camera = new Camera(new Vector2f());
         defaultShader = new Shader("assets/shaders/default.glsl");
@@ -121,17 +113,5 @@ public class Editor extends Scene {
         glBindVertexArray(0);
 
         defaultShader.detach();
-
-        if (firstTime) {
-            GameObject test2 = new GameObject("test2");
-            System.out.println("Creating object '" + test2.name + "'");
-            test2.addComponent(new SpriteRenderer());
-            this.addGameObject(test2);
-            firstTime = false;
-        }
-
-        for (GameObject g: gameObjects) {
-            g.update(dt);
-        }
     }
 }
