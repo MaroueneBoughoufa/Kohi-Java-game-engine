@@ -7,7 +7,7 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
-import util.Time;
+import kohi.util.Time;
 
 import java.nio.IntBuffer;
 
@@ -32,9 +32,9 @@ public class Window {
         this.width = 1920;
         this.height = 1080;
         this.title = "Test";
-        r = 1.0f;
-        g = 1.0f;
-        b = 1.0f;
+        r = 0.0f;
+        g = 0.0f;
+        b = 0.0f;
         a = 1.0f;
     }
 

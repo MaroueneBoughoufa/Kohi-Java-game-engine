@@ -1,14 +1,14 @@
 package kohi.scenes;
 
-import kohi.Camera;
-import kohi.GameObject;
-import kohi.Scene;
-import kohi.Transform;
+import kohi.*;
 
 import kohi.components.SpriteRenderer;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
+import kohi.util.AssetPool;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Editor extends Scene {
     public Editor() {}
@@ -35,11 +35,29 @@ public class Editor extends Scene {
                 this.addGameObject(g);
             }
         }
+
+        loadResources();
+    }
+
+    private void loadResources() {
+        AssetPool.getShader("assets/shaders/default.glsl");
     }
 
     @Override
     public void update(float dt) {
         //System.out.println("FPS: " + (1.0f / dt));
+        if (KeyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
+            camera.position.x += 100 * dt;
+        } else if (KeyListener.isKeyPressed((GLFW_KEY_LEFT))) {
+            camera.position.x -= 100 * dt;
+        }
+
+        if (KeyListener.isKeyPressed(GLFW_KEY_UP)) {
+            camera.position.y += 100 * dt;
+        } else if (KeyListener.isKeyPressed(GLFW_KEY_DOWN)) {
+            camera.position.y -= 100 * dt;
+        }
+
         for (GameObject g : this.gameObjects) {
             g.update(dt);
         }

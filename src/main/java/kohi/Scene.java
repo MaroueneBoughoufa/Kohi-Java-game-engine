@@ -1,6 +1,6 @@
 package kohi;
 
-import renderer.Renderer;
+import kohi.renderer.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;

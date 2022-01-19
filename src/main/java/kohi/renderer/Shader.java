@@ -1,4 +1,4 @@
-package renderer;
+package kohi.renderer;
 
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;

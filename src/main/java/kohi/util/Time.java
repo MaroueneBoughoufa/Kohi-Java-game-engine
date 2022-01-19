@@ -1,4 +1,4 @@
-package util;
+package kohi.util;
 
 public class Time {
     public static float timeStarted = System.nanoTime();
