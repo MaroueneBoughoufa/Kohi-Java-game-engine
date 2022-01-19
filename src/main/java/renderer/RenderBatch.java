@@ -2,6 +2,7 @@ package renderer;
 
 import kohi.Window;
 import kohi.components.SpriteRenderer;
+import org.joml.Vector4f;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -39,6 +40,10 @@ public class RenderBatch {
     }
 
     public void start() {
+        // ============================================================
+        // Generate VAO, VBO, and EBO buffer objects, and send to GPU
+        // ============================================================
+
         // Generate and bind VAO
         vaoID = glGenVertexArrays();
         glBindVertexArray(vaoID);
@@ -62,6 +67,20 @@ public class RenderBatch {
         glEnableVertexAttribArray(1);
     }
 
+    public void addSprite(SpriteRenderer sprite) {
+        // Get the index and add renderObject
+        int index = this.numSprites;
+        this.sprites[index] = sprite;
+        this.numSprites++;
+
+        // Add properties to local vertices array
+        loadVertexProperties(index);
+
+        if (numSprites >= this.maxBatchSize) {
+            this.hasRoom = false;
+        }
+    }
+
     public void render() {
         // For now, we will rebuffer all data every frame
         glBindBuffer(GL_ARRAY_BUFFER, vboID);
@@ -69,8 +88,8 @@ public class RenderBatch {
 
         // Use the shader
         shader.use();
-        shader.uploadMat4f("uProjection", Window.getCurrentScene().getCamera().getProjectionMatrix());
-        shader.uploadMat4f("uView", Window.getCurrentScene().getCamera().getViewMatrix());
+        shader.uploadMat4f("uProjMat", Window.getCurrentScene().getCamera().getProjectionMatrix());
+        shader.uploadMat4f("uViewMat", Window.getCurrentScene().getCamera().getViewMatrix());
 
         glBindVertexArray(vaoID);
         glEnableVertexAttribArray(0);
@@ -83,6 +102,38 @@ public class RenderBatch {
 
         glBindVertexArray(0);
         shader.detach();
+    }
+
+    private void loadVertexProperties(int index) {
+        SpriteRenderer sprite = this.sprites[index];
+
+        // Find offset within array (4 vertices per sprite)
+        int offset = index * 4 * VERTEX_SIZE;
+
+        Vector4f color = sprite.getColor();
+
+        // Add the vertices with the appropriate properties
+        float xAdd = 1.0f;
+        float yAdd = 1.0f;
+        for (int i = 0; i < 4; i++) {
+            switch (i) {
+                case 1 -> yAdd = 0.0f;
+                case 2 -> xAdd = 0.0f;
+                case 3 -> yAdd = 1.0f;
+            }
+
+            // Load position
+            vertices[offset] = sprite.gameObject.transform.position.x + (xAdd * sprite.gameObject.transform.scale.x);
+            vertices[offset + 1] = sprite.gameObject.transform.position.y + (yAdd * sprite.gameObject.transform.scale.y);
+
+            // Load color
+            vertices[offset + 2] = color.x;
+            vertices[offset + 3] = color.y;
+            vertices[offset + 4] = color.z;
+            vertices[offset + 5] = color.w;
+
+            offset += VERTEX_SIZE;
+        }
     }
 
     public int[] generateIndices() {
@@ -104,5 +155,9 @@ public class RenderBatch {
         elements[offsetArrayIndex + 3] = offset;
         elements[offsetArrayIndex + 4] = offset + 2;
         elements[offsetArrayIndex + 5] = offset + 1;
+    }
+
+    public boolean hasRoom() {
+        return this.hasRoom;
     }
 }

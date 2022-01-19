@@ -12,14 +12,10 @@ public class SpriteRenderer extends Component {
     }
 
     @Override
-    public void start() {
-        // Executes once the game starts
-    }
+    public void start() {}
 
     @Override
-    public void update(float dt) {
-        // Executes once every frame
-    }
+    public void update(float dt) {}
 
     public Vector4f getColor() {
         return this.color;

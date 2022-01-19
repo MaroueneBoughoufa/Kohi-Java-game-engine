@@ -10,13 +10,14 @@ public class GameObject {
 
     public GameObject(String name) {
         this.name = name;
-        this.components = new ArrayList<>();
         this.transform = new Transform();
+        this.components = new ArrayList<>();
     }
 
     public GameObject(String name, Transform transform) {
         this.name = name;
-        this.transform = new Transform();
+        this.transform = transform;
+        this.components = new ArrayList<>();
     }
 
     public <T extends Component> T getComponent(Class<T> componentClass) {
