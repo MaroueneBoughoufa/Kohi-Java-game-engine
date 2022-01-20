@@ -1,12 +1,9 @@
 package kohi.scenes;
 
 import kohi.*;
-
 import kohi.components.SpriteRenderer;
-
-import org.joml.Vector2f;
-import org.joml.Vector4f;
 import kohi.util.AssetPool;
+import org.joml.Vector2f;
 
 import static org.lwjgl.glfw.GLFW.*;
 
