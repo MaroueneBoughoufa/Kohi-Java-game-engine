@@ -2,8 +2,12 @@ package kohi.renderer;
 
 import kohi.Window;
 import kohi.components.SpriteRenderer;
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 import kohi.util.AssetPool;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -18,13 +22,17 @@ public class RenderBatch {
 
     private final int POS_OFFSET = 0;
     private final int COLOR_OFFSET = POS_OFFSET + POS_SIZE * Float.BYTES;
-    private final int VERTEX_SIZE = 6;
+    private final int TEX_COORDS_OFFSET = COLOR_OFFSET + COLOR_SIZE * Float.BYTES;
+    private final int TEX_ID_OFFSET = TEX_COORDS_OFFSET + TEX_COORDS_SIZE * Float.BYTES;
+    private final int VERTEX_SIZE = 9;
     private final int VERTEX_SIZE_BYTES = VERTEX_SIZE * Float.BYTES;
 
     private SpriteRenderer[] sprites;
     private int numSprites;
     private boolean hasRoom;
     private float[] vertices;
+    private int[] texSlots = {0, 1, 2, 3, 4, 5, 6, 7};
+    private List<Texture> textures;
 
     private int vaoID, vboID;
     private int maxBatchSize;
@@ -39,6 +47,8 @@ public class RenderBatch {
 
         this.numSprites = 0;
         this.hasRoom = true;
+
+        this.textures = new ArrayList<>();
     }
 
     public void start() {
@@ -67,6 +77,12 @@ public class RenderBatch {
 
         glVertexAttribPointer(1, COLOR_SIZE, GL_FLOAT, false, VERTEX_SIZE_BYTES, COLOR_OFFSET);
         glEnableVertexAttribArray(1);
+
+        glVertexAttribPointer(2, TEX_COORDS_SIZE, GL_FLOAT, false, VERTEX_SIZE_BYTES, TEX_COORDS_OFFSET);
+        glEnableVertexAttribArray(2);
+
+        glVertexAttribPointer(3, TEX_ID_SIZE, GL_FLOAT, false, VERTEX_SIZE_BYTES, TEX_ID_OFFSET);
+        glEnableVertexAttribArray(3);
     }
 
     public void addSprite(SpriteRenderer sprite) {
@@ -74,6 +90,12 @@ public class RenderBatch {
         int index = this.numSprites;
         this.sprites[index] = sprite;
         this.numSprites++;
+
+        if (sprite.getTexture() != null) {
+            if (!textures.contains(sprite.getTexture())) {
+                textures.add(sprite.getTexture());
+            }
+        }
 
         // Add properties to local vertices array
         loadVertexProperties(index);
@@ -93,6 +115,13 @@ public class RenderBatch {
         shader.uploadMat4f("uProjMat", Window.getCurrentScene().getCamera().getProjectionMatrix());
         shader.uploadMat4f("uViewMat", Window.getCurrentScene().getCamera().getViewMatrix());
 
+        for (int i = 0; i < textures.size(); i++) {
+            glActiveTexture(GL_TEXTURE0 + i + 1);
+            textures.get(i).bind();
+        }
+
+        shader.uploadIntArray("uTextures", texSlots);
+
         glBindVertexArray(vaoID);
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
@@ -103,6 +132,11 @@ public class RenderBatch {
         glDisableVertexAttribArray(1);
 
         glBindVertexArray(0);
+
+        for (int i=0; i < textures.size(); i++) {
+            textures.get(i).unbind();
+        }
+
         shader.detach();
     }
 
@@ -113,6 +147,17 @@ public class RenderBatch {
         int offset = index * 4 * VERTEX_SIZE;
 
         Vector4f color = sprite.getColor();
+        Vector2f[] texCoords = sprite.getTextureCoords();
+
+        int texID = 0;
+        if (sprite.getTexture() != null) {
+            for (int i = 0; i < textures.size(); i++) {
+                if (textures.get(i) == sprite.getTexture()) {
+                    texID = i + 1;
+                    break;
+                }
+            }
+        }
 
         // Add the vertices with the appropriate properties
         float xAdd = 1.0f;
@@ -133,6 +178,13 @@ public class RenderBatch {
             vertices[offset + 3] = color.y;
             vertices[offset + 4] = color.z;
             vertices[offset + 5] = color.w;
+
+            // Load texture coordinates
+            vertices[offset + 6] = texCoords[i].x;
+            vertices[offset + 7] = texCoords[i].y;
+
+            // Load texture ID
+            vertices[offset + 8] = texID;
 
             offset += VERTEX_SIZE;
         }
