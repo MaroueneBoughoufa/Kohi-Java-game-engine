@@ -22,16 +22,10 @@ public class RenderBatch {
 
     private final int POS_OFFSET = 0;
     private final int COLOR_OFFSET = POS_OFFSET + POS_SIZE * Float.BYTES;
-<<<<<<< HEAD
     private final int TEX_COORDS_OFFSET = COLOR_OFFSET + COLOR_SIZE + Float.BYTES;
     private final int TEX_ID_OFFSET = TEX_COORDS_OFFSET + TEX_COORDS_SIZE * Float.BYTES;
 
-    private final int VERTEX_SIZE = POS_SIZE + COLOR_SIZE + TEX_COORDS_SIZE + TEX_ID_SIZE;
-=======
-    private final int TEX_COORDS_OFFSET = COLOR_OFFSET + COLOR_SIZE * Float.BYTES;
-    private final int TEX_ID_OFFSET = TEX_COORDS_OFFSET + TEX_COORDS_SIZE * Float.BYTES;
     private final int VERTEX_SIZE = 9;
->>>>>>> 924f406bde7db2508087b83747a57bede11040ec
     private final int VERTEX_SIZE_BYTES = VERTEX_SIZE * Float.BYTES;
 
     private SpriteRenderer[] sprites;
@@ -41,7 +35,6 @@ public class RenderBatch {
     private int[] texSlots = {0, 1, 2, 3, 4, 5, 6, 7};
     private List<Texture> textures;
 
-    private List<Texture> textures;
     private int vaoID, vboID;
     private int maxBatchSize;
     private Shader shader;
@@ -55,10 +48,6 @@ public class RenderBatch {
 
         this.numSprites = 0;
         this.hasRoom = true;
-<<<<<<< HEAD
-=======
-
->>>>>>> 924f406bde7db2508087b83747a57bede11040ec
         this.textures = new ArrayList<>();
     }
 
@@ -144,8 +133,8 @@ public class RenderBatch {
 
         glBindVertexArray(0);
 
-        for (int i=0; i < textures.size(); i++) {
-            textures.get(i).unbind();
+        for (Texture texture : textures) {
+            texture.unbind();
         }
 
         shader.detach();
@@ -165,17 +154,6 @@ public class RenderBatch {
             for (int i = 0; i < textures.size(); i++) {
                 if (textures.get(i) == sprite.getTexture()) {
                     texID = i + 1;
-                    break;
-                }
-            }
-        }
-
-        int texID = 0;
-
-        if (sprite.getTexture() != null) {
-            for (int i = 0; i < textures.size(); i++) {
-                if (textures.get(i) == sprite.getTexture()) {
-                    texID = i;
                     break;
                 }
             }
@@ -202,17 +180,11 @@ public class RenderBatch {
             vertices[offset + 5] = color.w;
 
             // Load texture coordinates
-<<<<<<< HEAD
-
-
-            // Load texture ID
-=======
             vertices[offset + 6] = texCoords[i].x;
             vertices[offset + 7] = texCoords[i].y;
 
             // Load texture ID
             vertices[offset + 8] = texID;
->>>>>>> 924f406bde7db2508087b83747a57bede11040ec
 
             offset += VERTEX_SIZE;
         }
