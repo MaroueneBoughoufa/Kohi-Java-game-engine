@@ -1,7 +1,9 @@
 package kohi.scenes;
 
 import kohi.*;
+import kohi.components.Sprite;
 import kohi.components.SpriteRenderer;
+import kohi.components.SpriteSheet;
 import kohi.util.AssetPool;
 import org.joml.Vector2f;
 
@@ -12,21 +14,25 @@ public class Editor extends Scene {
 
     @Override
     public void init() {
+        loadResources();
+
         this.camera = new Camera(new Vector2f());
 
+        SpriteSheet sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
+
         GameObject Obj1 = new GameObject("Obj1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)));
-        Obj1.addComponent(new SpriteRenderer(AssetPool.getTexture("assets/images/bomb-nut.png")));
-        this.addGameObject(Obj1);
+        Obj1.addComponent(new SpriteRenderer(sprites.getSprite(0)));
+        this.addGameObjectToScene(Obj1);
 
         GameObject Obj2 = new GameObject("Obj20", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)));
-        Obj2.addComponent(new SpriteRenderer(AssetPool.getTexture("assets/images/itchio-profile.jpg")));
-        this.addGameObject(Obj2);
-
-        loadResources();
+        Obj2.addComponent(new SpriteRenderer(sprites.getSprite(15)));
+        this.addGameObjectToScene(Obj2);
     }
 
     private void loadResources() {
         AssetPool.getShader("assets/shaders/default.glsl");
+        AssetPool.addSpriteSheet("assets/images/spritesheet.png",
+                new SpriteSheet(AssetPool.getTexture("assets/images/spritesheet.png"), 16, 16, 26, 0));
     }
 
     @Override

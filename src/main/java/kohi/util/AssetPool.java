@@ -1,5 +1,6 @@
 package kohi.util;
 
+import kohi.components.SpriteSheet;
 import kohi.renderer.Shader;
 import kohi.renderer.Texture;
 
@@ -10,6 +11,7 @@ import java.util.Map;
 public class AssetPool {
     private static Map<String, Shader> shaders = new HashMap<>();
     private static Map<String, Texture> textures = new HashMap<>();
+    private static Map<String, SpriteSheet> spritesheets = new HashMap<>();
 
     public static Shader getShader(String resourceName) {
         File file = new File(resourceName);
@@ -32,5 +34,18 @@ public class AssetPool {
             AssetPool.textures.put(file.getAbsolutePath(), texture);
             return texture;
         }
+    }
+
+    public static void addSpriteSheet(String resourceName, SpriteSheet spriteSheet) {
+        File file = new File(resourceName);
+        if (!AssetPool.spritesheets.containsKey(file.getAbsolutePath())) {
+            AssetPool.spritesheets.put(file.getAbsolutePath(), spriteSheet);
+        }
+    }
+
+    public static SpriteSheet getSpriteSheet(String resourceName) {
+        File file = new File(resourceName);
+        assert AssetPool.spritesheets.containsKey(file.getAbsolutePath()) : "Error: tried to access spritesheet '"+resourceName+"' and it was not added to the resource pool";
+        return spritesheets.getOrDefault(file.getAbsolutePath(), null);
     }
 }

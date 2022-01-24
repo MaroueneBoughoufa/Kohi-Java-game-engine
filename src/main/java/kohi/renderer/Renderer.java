@@ -14,20 +14,23 @@ public class Renderer {
         this.batches = new ArrayList<>();
     }
 
-    public void add(GameObject g) {
-        SpriteRenderer sprite = g.getComponent(SpriteRenderer.class);
-        if (sprite != null) {
-            add(sprite);
+    public void add(GameObject go) {
+        SpriteRenderer spr = go.getComponent(SpriteRenderer.class);
+        if (spr != null) {
+            add(spr);
         }
     }
 
-    public void add(SpriteRenderer sprite) {
+    private void add(SpriteRenderer sprite) {
         boolean added = false;
         for (RenderBatch batch : batches) {
             if (batch.hasRoom()) {
-                batch.addSprite(sprite);
-                added = true;
-                break;
+                Texture tex = sprite.getTexture();
+                if (tex == null || (batch.hasTexture(tex) || batch.hasTextureRoom())) {
+                    batch.addSprite(sprite);
+                    added = true;
+                    break;
+                }
             }
         }
 
