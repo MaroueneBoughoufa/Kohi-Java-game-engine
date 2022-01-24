@@ -1,10 +1,9 @@
 package kohi.scenes;
 
-import kohi.*;
-import kohi.components.Sprite;
 import kohi.components.SpriteRenderer;
 import kohi.components.SpriteSheet;
-import kohi.util.AssetPool;
+import kohi.core.*;
+import kohi.core.util.AssetPool;
 import org.joml.Vector2f;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -12,15 +11,18 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Editor extends Scene {
     public Editor() {}
 
+    private GameObject Obj1;
+    private SpriteSheet sprites;
+
     @Override
     public void init() {
         loadResources();
 
         this.camera = new Camera(new Vector2f());
 
-        SpriteSheet sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
+        sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
 
-        GameObject Obj1 = new GameObject("Obj1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)));
+        Obj1 = new GameObject("Obj1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)));
         Obj1.addComponent(new SpriteRenderer(sprites.getSprite(0)));
         this.addGameObjectToScene(Obj1);
 
@@ -35,8 +37,21 @@ public class Editor extends Scene {
                 new SpriteSheet(AssetPool.getTexture("assets/images/spritesheet.png"), 16, 16, 26, 0));
     }
 
+    private int spriteIndex = 0;
+    private float spriteFlipTimeLeft = 0.0f;
+
     @Override
     public void update(float dt) {
+        spriteFlipTimeLeft -= dt;
+        if (spriteFlipTimeLeft <= 0) {
+            spriteFlipTimeLeft = 0.1f;
+            spriteIndex++;
+            if (spriteIndex > 3) {
+                spriteIndex = 0;
+            }
+            Obj1.getComponent(SpriteRenderer.class).setSprite(sprites.getSprite(spriteIndex));
+        }
+
         //System.out.println("FPS: " + (1.0f / dt));
         if (KeyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
             camera.position.x += 100 * dt;

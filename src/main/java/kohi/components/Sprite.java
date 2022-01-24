@@ -1,6 +1,6 @@
 package kohi.components;
 
-import kohi.renderer.Texture;
+import kohi.core.renderer.Texture;
 import org.joml.Vector2f;
 
 public class Sprite {
