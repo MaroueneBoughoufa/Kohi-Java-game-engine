@@ -23,11 +23,11 @@ public class Editor extends Scene {
 
         sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
 
-        Obj1 = new GameObject("Obj1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)));
+        Obj1 = new GameObject("Obj1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)), 1);
         Obj1.addComponent(new SpriteRenderer(sprites.getSprite(0)));
         this.addGameObjectToScene(Obj1);
 
-        Obj2 = new GameObject("Obj2", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)));
+        Obj2 = new GameObject("Obj2", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)), 0);
         Obj2.addComponent(new SpriteRenderer(sprites.getSprite(14)));
         this.addGameObjectToScene(Obj2);
     }
@@ -52,7 +52,7 @@ public class Editor extends Scene {
             if (spriteIndex > 3) {
                 spriteIndex = 0;
             }
-	        if (spriteIndex2 > 16) {
+	        if (spriteIndex2 > 15) {
 		        spriteIndex2 = 14;
 	        }
             Obj1.getComponent(SpriteRenderer.class).setSprite(sprites.getSprite(spriteIndex));
