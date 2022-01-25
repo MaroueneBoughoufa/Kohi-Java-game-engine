@@ -31,9 +31,9 @@ public class Window {
         this.width = 1920;
         this.height = 1080;
         this.title = "Test";
-        r = 0.0f;
-        g = 0.0f;
-        b = 0.0f;
+        r = 0.3f;
+        g = 0.3f;
+        b = 0.3f;
         a = 1.0f;
     }
 
