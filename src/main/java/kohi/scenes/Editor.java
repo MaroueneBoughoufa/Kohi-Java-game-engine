@@ -35,7 +35,7 @@ public class Editor extends Scene {
     private void loadResources() {
         AssetPool.getShader("assets/shaders/default.glsl");
         AssetPool.addSpriteSheet("assets/images/spritesheet.png",
-                new SpriteSheet(AssetPool.getTexture("assets/images/spritesheet.png"), 16, 16, 26, 0));
+                new SpriteSheet(AssetPool.getTexture("assets/images/spritesheet.png"), 16, 16, 26, 0))
     }
 
     private int spriteIndex = 0;
