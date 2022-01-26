@@ -59,6 +59,14 @@ public class Window {
         return currentScene;
     }
 
+    public int getHeight() {
+       return this.height;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
     public static Window get() {
         if (Window.window == null) {
             Window.window = new Window();
