@@ -9,6 +9,8 @@ import imgui.flag.ImGuiKey;
 import imgui.flag.ImGuiMouseCursor;
 import imgui.gl3.ImGuiImplGl3;
 
+import java.util.Objects;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 public class ImGUILayer {
@@ -133,11 +135,7 @@ public class ImGUILayer {
             @Override
             public String get() {
                 final String clipboardString = glfwGetClipboardString(glfwWindow);
-                if (clipboardString != null) {
-                    return clipboardString;
-                } else {
-                    return "";
-                }
+                return Objects.requireNonNullElse(clipboardString, "");
             }
         });
 
@@ -199,8 +197,8 @@ public class ImGUILayer {
 
     private void startFrame(final float deltaTime) {
         // Get window properties and mouse position
-        float[] winWidth = {Window.get().getWidth()};
-        float[] winHeight = {Window.get().getHeight()};
+        float[] winWidth = {Window.getWidth()};
+        float[] winHeight = {Window.getHeight()};
         double[] mousePosX = {0};
         double[] mousePosY = {0};
         glfwGetCursorPos(glfwWindow, mousePosX, mousePosY);
@@ -225,7 +223,7 @@ public class ImGUILayer {
     }
 
     // If you want to clean a room after yourself - do it by yourself
-    private void destroyImGui() {
+    public void destroyImGui() {
         imGuiGl3.dispose();
         ImGui.destroyContext();
     }

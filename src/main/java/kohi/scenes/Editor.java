@@ -59,7 +59,7 @@ public class Editor extends Scene {
 	        Obj2.getComponent(SpriteRenderer.class).setSprite(sprites.getSprite(spriteIndex2));
         }
 
-        //System.out.println("FPS: " + (1.0f / dt));
+        System.out.println("FPS: " + (1.0f / dt));
         if (KeyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
             camera.position.x += 100 * dt;
         } else if (KeyListener.isKeyPressed((GLFW_KEY_LEFT))) {
