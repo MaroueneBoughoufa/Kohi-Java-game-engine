@@ -20,6 +20,10 @@ project.ext.steamworks4jVersion = "1.8.0"
 project.ext.lwjglNatives = "natives-windows"
 
 dependencies {
+    // ImGui files
+    implementation fileTree('libs') {include '*jar'}
+
+    // the entirety of lwjgl
     implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 
     implementation "org.lwjgl:lwjgl"
