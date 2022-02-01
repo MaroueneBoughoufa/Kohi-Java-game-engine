@@ -147,27 +147,13 @@ public class ImGUILayer {
         final ImFontConfig fontConfig = new ImFontConfig(); // Natively allocated object, should be explicitly destroyed
 
         // Glyphs could be added per-font as well as per config used globally like here
-<<<<<<< HEAD
         fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesCyrillic());
 
         // Fonts merge example
         fontConfig.setPixelSnapH(true);
-        fontAtlas.addFontFromFileTTF("assets/fonts/PublicPixel-0W6DP.ttf", );
+        fontAtlas.addFontFromFileTTF("assets/fonts/PublicPixel-0W6DP.ttf", 16);
 
         fontConfig.destroy(); // After all fonts were added we don't need this config more
-
-        // ------------------------------------------------------------
-        // Use freetype instead of stb_truetype to build a fonts texture
-        ImGuiFreeType.buildFontAtlas(fontAtlas, ImGuiFreeType.RasterizerFlags.LightHinting);
-=======
-        fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
-
-        // Fonts merge example
-        fontConfig.setPixelSnapH(true);
-        fontAtlas.addFontFromFileTTF("assets/fonts/PublicPixel-0W6DP.ttf", 16, fontConfig);
-
-        fontConfig.destroy(); // After all fonts were added we don't need this config more
->>>>>>> d24ec81c415622973a357421395f20e1c0502eca
 
         // Method initializes LWJGL3 renderer.
         // This method SHOULD be called after you've initialized your ImGui configuration (fonts and so on).
