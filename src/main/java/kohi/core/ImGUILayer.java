@@ -37,7 +37,7 @@ public class ImGUILayer {
         // Initialize ImGuiIO config
         final ImGuiIO io = ImGui.getIO();
 
-        io.setIniFilename(null); // We don't want to save .ini file
+        io.setIniFilename("imgui.ini");
         io.setConfigFlags(ImGuiConfigFlags.NavEnableKeyboard); // Navigation with keyboard
         io.setBackendFlags(ImGuiBackendFlags.HasMouseCursors); // Mouse cursors to display while resizing windows etc.
         io.setBackendPlatformName("imgui_java_impl_glfw");
@@ -147,6 +147,7 @@ public class ImGUILayer {
         final ImFontConfig fontConfig = new ImFontConfig(); // Natively allocated object, should be explicitly destroyed
 
         // Glyphs could be added per-font as well as per config used globally like here
+<<<<<<< HEAD
         fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesCyrillic());
 
         // Fonts merge example
@@ -158,6 +159,15 @@ public class ImGUILayer {
         // ------------------------------------------------------------
         // Use freetype instead of stb_truetype to build a fonts texture
         ImGuiFreeType.buildFontAtlas(fontAtlas, ImGuiFreeType.RasterizerFlags.LightHinting);
+=======
+        fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
+
+        // Fonts merge example
+        fontConfig.setPixelSnapH(true);
+        fontAtlas.addFontFromFileTTF("assets/fonts/PublicPixel-0W6DP.ttf", 16, fontConfig);
+
+        fontConfig.destroy(); // After all fonts were added we don't need this config more
+>>>>>>> d24ec81c415622973a357421395f20e1c0502eca
 
         // Method initializes LWJGL3 renderer.
         // This method SHOULD be called after you've initialized your ImGui configuration (fonts and so on).
@@ -165,12 +175,12 @@ public class ImGUILayer {
         imGuiGl3.init("#version 330 core");
     }
 
-    public void update(float dt) {
+    public void update(float dt, Scene currentScene) {
         startFrame(dt);
 
         // Any Dear ImGui code SHOULD go between ImGui.newFrame()/ImGui.render() methods
         ImGui.newFrame();
-        ImGui.showDemoWindow();
+        currentScene.sceneImgui();
         ImGui.render();
 
         endFrame();

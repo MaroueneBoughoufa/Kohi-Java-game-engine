@@ -113,7 +113,7 @@ public class Window {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+        glfwWindowHint(GLFW_MAXIMIZED, GLFW_FALSE);
 
         // Create the window
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
@@ -192,7 +192,7 @@ public class Window {
                 currentScene.update(dt);
             }
 
-            this.imGUILayer.update(dt);
+            this.imGUILayer.update(dt, currentScene);
 
             glfwSwapBuffers(glfwWindow);
 

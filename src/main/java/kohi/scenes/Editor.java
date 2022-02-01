@@ -1,12 +1,14 @@
 package kohi.scenes;
 
+import imgui.ImGui;
 import kohi.components.SpriteRenderer;
 import kohi.components.SpriteSheet;
 import kohi.core.*;
 import kohi.core.util.AssetPool;
 import org.joml.Vector2f;
+import org.joml.Vector4f;
 
-import static org.lwjgl.glfw.GLFW.*;
+//import static org.lwjgl.glfw.GLFW.*;
 
 public class Editor extends Scene {
     public Editor() {}
@@ -21,6 +23,7 @@ public class Editor extends Scene {
 
         this.camera = new Camera(new Vector2f());
 
+<<<<<<< HEAD
 //        sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
 //
 //        Obj1 = new GameObject("Obj1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)), 1);
@@ -30,6 +33,18 @@ public class Editor extends Scene {
 //        Obj2 = new GameObject("Obj2", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)), 0);
 //        Obj2.addComponent(new SpriteRenderer(sprites.getSprite(14)));
 //        this.addGameObjectToScene(Obj2);
+=======
+        sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
+
+        Obj1 = new GameObject("Obj1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)));
+        Obj1.addComponent(new SpriteRenderer(sprites.getSprite(0)));
+        this.addGameObjectToScene(Obj1);
+
+        Obj2 = new GameObject("Obj2", new Transform(new Vector2f(500, 100), new Vector2f(100, 100)));
+        Obj2.addComponent(new SpriteRenderer(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f)));
+        this.addGameObjectToScene(Obj2);
+        this.activeGameObject = Obj2;
+>>>>>>> d24ec81c415622973a357421395f20e1c0502eca
     }
 
     private void loadResources() {
@@ -38,6 +53,7 @@ public class Editor extends Scene {
                 new SpriteSheet(AssetPool.getTexture("assets/images/spritesheet.png"), 16, 16, 26, 0));
     }
 
+<<<<<<< HEAD
 //    private int spriteIndex = 0;
 //    private int spriteIndex2 = 14;
 //    private float spriteFlipTimeLeft = 0.0f;
@@ -60,6 +76,24 @@ public class Editor extends Scene {
 //        }
 
         //System.out.println("FPS: " + (1.0f / dt));
+=======
+    private int spriteIndex = 0;
+    private float spriteFlipTimeLeft = 0.0f;
+
+    @Override
+    public void update(float dt) {
+        spriteFlipTimeLeft -= dt;
+        if (spriteFlipTimeLeft <= 0) {
+            spriteFlipTimeLeft = 0.1f;
+            spriteIndex++;
+            if (spriteIndex > 3) {
+                spriteIndex = 0;
+            }
+            Obj1.getComponent(SpriteRenderer.class).setSprite(sprites.getSprite(spriteIndex));
+        }
+
+        /*System.out.println("FPS: " + (1.0f / dt));
+>>>>>>> d24ec81c415622973a357421395f20e1c0502eca
         if (KeyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
             camera.position.x += 100 * dt;
         } else if (KeyListener.isKeyPressed((GLFW_KEY_LEFT))) {
@@ -74,8 +108,15 @@ public class Editor extends Scene {
 
         for (GameObject g : this.gameObjects) {
             g.update(dt);
-        }
+        }*/
 
         this.renderer.render();
+    }
+
+    @Override
+    public void imgui() {
+        ImGui.begin("Test window");
+        ImGui.text("Some random text");
+        ImGui.end();
     }
 }
