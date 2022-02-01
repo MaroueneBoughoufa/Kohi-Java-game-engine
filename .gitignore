@@ -1,6 +1,7 @@
-/.idea
+
 *.iml
 out
 gen
-/build
-/.gradle
+/build/
+/.idea/
+/.gradle/
