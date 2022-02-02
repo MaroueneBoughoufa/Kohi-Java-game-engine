@@ -1,9 +1,9 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/modules.xml
+/Kohi.iml
 ../.gradle/
 ../build/
-*.gradle
 ../bin/
-../libs/
 ../imgui.ini
