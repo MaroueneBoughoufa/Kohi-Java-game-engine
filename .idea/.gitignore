@@ -3,6 +3,7 @@
 /workspace.xml
 /modules.xml
 /Kohi.iml
+/Kohi-java-game-engine.iml
 ../.gradle/
 ../build/
 ../bin/
