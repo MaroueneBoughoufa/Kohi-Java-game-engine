@@ -1,5 +1,10 @@
 package kohi.scenes;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonFactoryBuilder;
+import com.fasterxml.jackson.core.json.JsonReadFeature;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import imgui.ImGui;
 import kohi.components.SpriteRenderer;
 import kohi.components.SpriteSheet;
@@ -17,6 +22,7 @@ public class Editor extends Scene {
 
     @Override
     public void init() {
+
         loadResources();
 
         this.camera = new Camera(new Vector2f());
@@ -24,13 +30,24 @@ public class Editor extends Scene {
         sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
 
         Obj1 = new GameObject("Obj1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)));
-        Obj1.addComponent(new SpriteRenderer(sprites.getSprite(0)));
+        SpriteRenderer Obj1Sprite = new SpriteRenderer();
+        Obj1Sprite.setSprite(sprites.getSprite(0));
+        Obj1.addComponent(Obj1Sprite);
         this.addGameObjectToScene(Obj1);
 
-        Obj2 = new GameObject("Obj2", new Transform(new Vector2f(500, 100), new Vector2f(100, 100)));
-        Obj2.addComponent(new SpriteRenderer(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f)));
+        Obj2 = new GameObject("Obj2", new Transform(new Vector2f(500, 100), new Vector2f(200, 200)));
+        SpriteRenderer Obj2Sprite = new SpriteRenderer();
+        Obj2Sprite.setColor(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f));
+        Obj2.addComponent(Obj2Sprite);
         this.addGameObjectToScene(Obj2);
+
         this.activeGameObject = Obj2;
+
+        Gson json = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        System.out.println(json.toJson(Obj2)); 
     }
 
     private void loadResources() {
