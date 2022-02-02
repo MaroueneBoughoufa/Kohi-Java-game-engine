@@ -1,8 +1,5 @@
 package kohi.scenes;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonFactoryBuilder;
-import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import imgui.ImGui;
@@ -47,7 +44,7 @@ public class Editor extends Scene {
                 .setPrettyPrinting()
                 .create();
 
-        System.out.println(json.toJson(Obj2)); 
+        System.out.println(json.toJson(Obj2));
     }
 
     private void loadResources() {
