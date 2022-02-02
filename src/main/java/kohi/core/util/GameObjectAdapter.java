@@ -1,2 +1,28 @@
-package kohi.core.util;public class GamObjectAdapter {
+package kohi.core.util;
+
+import com.google.gson.*;
+import kohi.core.Component;
+import kohi.core.GameObject;
+import kohi.core.Transform;
+
+import java.lang.reflect.Type;
+
+public class GameObjectAdapter implements JsonDeserializer<GameObject> {
+    @Override
+    public GameObject deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        JsonObject jsonObject = json.getAsJsonObject();
+        String name = jsonObject.get("name").getAsString();
+        JsonArray components = jsonObject.getAsJsonArray("components");
+        Transform transform = context.deserialize(jsonObject.get("transform"), Transform.class);
+        int zIndex = context.deserialize(jsonObject.get("zIndex"), int.class);
+
+        GameObject gameObject = new GameObject(name, transform, zIndex);
+
+        for (JsonElement e : components) {
+            Component c = context.deserialize(e, Component.class);
+            gameObject.addComponent(c);
+        }
+
+        return gameObject;
+    }
 }

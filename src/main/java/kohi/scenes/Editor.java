@@ -7,11 +7,12 @@ import kohi.components.SpriteRenderer;
 import kohi.components.SpriteSheet;
 import kohi.core.*;
 import kohi.core.util.AssetPool;
+import kohi.core.util.ComponentAdapter;
+import kohi.core.util.GameObjectAdapter;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 public class Editor extends Scene {
-    public Editor() {}
 
     private GameObject Obj1;
     private GameObject Obj2;
@@ -19,10 +20,13 @@ public class Editor extends Scene {
 
     @Override
     public void init() {
-
         loadResources();
 
         this.camera = new Camera(new Vector2f());
+
+        if (levelLoaded) {
+            return;
+        }
 
         sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
 
@@ -39,12 +43,6 @@ public class Editor extends Scene {
         this.addGameObjectToScene(Obj2);
 
         this.activeGameObject = Obj2;
-
-        Gson json = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
-        System.out.println(json.toJson(Obj2));
     }
 
     private void loadResources() {
