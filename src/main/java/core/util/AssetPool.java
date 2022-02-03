@@ -1,8 +1,8 @@
-package kohi.core.util;
+package core.util;
 
-import kohi.components.SpriteSheet;
-import kohi.core.renderer.Shader;
-import kohi.core.renderer.Texture;
+import core.components.SpriteSheet;
+import core.renderer.Shader;
+import core.renderer.Texture;
 
 import java.io.File;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package kohi.core.renderer;
+package core.renderer;
 
 import org.joml.*;
 import org.lwjgl.BufferUtils;

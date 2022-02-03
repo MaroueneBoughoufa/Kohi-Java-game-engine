@@ -1,7 +1,7 @@
-package kohi.core;
+package core;
 
-import kohi.scenes.Editor;
-import kohi.scenes.LevelScene;
+import core.scenes.Editor;
+import core.scenes.LevelScene;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;

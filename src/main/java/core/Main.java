@@ -1,6 +1,4 @@
-package kohi;
-
-import kohi.core.Window;
+package core;
 
 public class Main {
     public static void main(String[] args) {

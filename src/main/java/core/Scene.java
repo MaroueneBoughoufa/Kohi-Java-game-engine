@@ -1,11 +1,11 @@
-package kohi.core;
+package core;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import imgui.ImGui;
-import kohi.core.renderer.Renderer;
-import kohi.core.util.ComponentAdapter;
-import kohi.core.util.GameObjectAdapter;
+import core.renderer.Renderer;
+import core.util.ComponentAdapter;
+import core.util.GameObjectAdapter;
 
 import java.io.FileWriter;
 import java.io.IOException;

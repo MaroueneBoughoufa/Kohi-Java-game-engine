@@ -1,6 +1,6 @@
-package kohi.scenes;
+package core.scenes;
 
-import kohi.core.Scene;
+import core.Scene;
 
 public class LevelScene extends Scene {
     public LevelScene() {

@@ -1,4 +1,4 @@
-package kohi.core;
+package core;
 
 import org.joml.Vector2f;
 

@@ -1,9 +1,9 @@
-package kohi.components;
+package core.components;
 
 import imgui.ImGui;
-import kohi.core.Component;
-import kohi.core.Transform;
-import kohi.core.renderer.Texture;
+import core.Component;
+import core.Transform;
+import core.renderer.Texture;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 

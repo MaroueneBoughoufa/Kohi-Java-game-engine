@@ -1,6 +1,6 @@
-package kohi.components;
+package core.components;
 
-import kohi.core.Component;
+import core.Component;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 

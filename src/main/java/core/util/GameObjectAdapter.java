@@ -1,9 +1,9 @@
-package kohi.core.util;
+package core.util;
 
 import com.google.gson.*;
-import kohi.core.Component;
-import kohi.core.GameObject;
-import kohi.core.Transform;
+import core.Component;
+import core.GameObject;
+import core.Transform;
 
 import java.lang.reflect.Type;
 

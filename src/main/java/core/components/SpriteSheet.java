@@ -1,6 +1,6 @@
-package kohi.components;
+package core.components;
 
-import kohi.core.renderer.Texture;
+import core.renderer.Texture;
 import org.joml.Vector2f;
 
 import java.util.ArrayList;

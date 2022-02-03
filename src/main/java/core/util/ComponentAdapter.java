@@ -1,7 +1,7 @@
-package kohi.core.util;
+package core.util;
 
 import com.google.gson.*;
-import kohi.core.Component;
+import core.Component;
 
 import java.lang.reflect.Type;
 

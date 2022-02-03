@@ -1,7 +1,7 @@
-package kohi.core.renderer;
+package core.renderer;
 
-import kohi.core.GameObject;
-import kohi.components.SpriteRenderer;
+import core.GameObject;
+import core.components.SpriteRenderer;
 
 import java.util.ArrayList;
 import java.util.Collections;

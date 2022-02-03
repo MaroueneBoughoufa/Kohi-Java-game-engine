@@ -1,10 +1,10 @@
-package kohi.core.renderer;
+package core.renderer;
 
-import kohi.core.Window;
-import kohi.components.SpriteRenderer;
+import core.Window;
+import core.components.SpriteRenderer;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-import kohi.core.util.AssetPool;
+import core.util.AssetPool;
 
 import java.util.ArrayList;
 import java.util.List;

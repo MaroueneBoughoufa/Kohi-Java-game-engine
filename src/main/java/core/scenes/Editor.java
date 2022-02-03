@@ -1,10 +1,13 @@
-package kohi.scenes;
+package core.scenes;
 
 import imgui.ImGui;
-import kohi.components.SpriteRenderer;
-import kohi.components.SpriteSheet;
-import kohi.core.*;
-import kohi.core.util.AssetPool;
+import core.Camera;
+import core.GameObject;
+import core.Scene;
+import core.Transform;
+import core.components.SpriteRenderer;
+import core.components.SpriteSheet;
+import core.util.AssetPool;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 

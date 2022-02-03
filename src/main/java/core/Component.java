@@ -1,4 +1,4 @@
-package kohi.core;
+package core;
 
 import imgui.ImGui;
 import org.joml.Vector2f;

@@ -1,4 +1,4 @@
-package kohi.core;
+package core;
 
 import imgui.*;
 import imgui.callback.ImStrConsumer;
