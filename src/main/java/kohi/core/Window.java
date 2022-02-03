@@ -113,7 +113,7 @@ public class Window {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+        glfwWindowHint(GLFW_MAXIMIZED, GLFW_FALSE);
 
         // Create the window
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
@@ -182,6 +182,8 @@ public class Window {
         float endTime;
         float dt = -1.0f;
 
+        currentScene.load();
+
         while (!glfwWindowShouldClose(glfwWindow)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
@@ -192,7 +194,7 @@ public class Window {
                 currentScene.update(dt);
             }
 
-            this.imGUILayer.update(dt);
+            this.imGUILayer.update(dt, currentScene);
 
             glfwSwapBuffers(glfwWindow);
 
@@ -200,5 +202,7 @@ public class Window {
             dt = endTime - beginTime;
             beginTime = endTime;
         }
+
+        currentScene.export();
     }
 }
