@@ -42,19 +42,19 @@ public class Window {
         switch (newScene) {
             case 0 -> {
                 currentScene = new Editor();
-                currentScene.init();
-                currentScene.start();
             }
             case 1 -> {
                 currentScene = new LevelScene();
-                currentScene.init();
-                currentScene.start();
             }
             default -> {
                 assert false: "Unknown scene '" + newScene + "'";
             }
         }
+        currentScene.load();
+        currentScene.init();
+        currentScene.start();
     }
+    
 
     public static Scene getCurrentScene() {
         return currentScene;
@@ -181,8 +181,6 @@ public class Window {
         float beginTime = (float)glfwGetTime();
         float endTime;
         float dt = -1.0f;
-
-        currentScene.load();
 
         while (!glfwWindowShouldClose(glfwWindow)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
