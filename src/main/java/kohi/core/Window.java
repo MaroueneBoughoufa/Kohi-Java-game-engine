@@ -40,12 +40,8 @@ public class Window {
 
     public static void changeScene(int newScene) {
         switch (newScene) {
-            case 0 -> {
-                currentScene = new Editor();
-            }
-            case 1 -> {
-                currentScene = new LevelScene();
-            }
+            case 0 -> currentScene = new Editor();
+            case 1 -> currentScene = new LevelScene();
             default -> {
                 assert false: "Unknown scene '" + newScene + "'";
             }
