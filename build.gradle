@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'com.core'
+group 'com.kohi'
 version '1.0-SNAPSHOT'
 
 repositories {
