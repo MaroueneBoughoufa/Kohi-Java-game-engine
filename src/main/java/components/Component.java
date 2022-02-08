@@ -95,6 +95,6 @@ public abstract class Component {
     }
 
     public static void init(int maxID) {
-        ID_COUNTER = maxID
+        ID_COUNTER = maxID;
     }
 }
