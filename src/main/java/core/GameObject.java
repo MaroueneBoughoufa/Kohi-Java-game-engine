@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameObject {
+    private static int ID_COUNTER = 0;
+    private int uid = -1;
+
     public String name;
     private List<Component> components;
     public Transform transform;
@@ -16,6 +19,7 @@ public class GameObject {
         this.transform = new Transform();
         this.components = new ArrayList<>();
         this.zIndex = 0;
+        this.uid = ID_COUNTER++;
     }
 
     public GameObject(String name, Transform transform) {
@@ -23,6 +27,7 @@ public class GameObject {
         this.zIndex = 0;
         this.transform = transform;
         this.components = new ArrayList<>();
+        this.uid = ID_COUNTER++;
     }
 
     public GameObject(String name, Transform transform, int zIndex) {
@@ -30,6 +35,7 @@ public class GameObject {
         this.zIndex = zIndex;
         this.transform = transform;
         this.components = new ArrayList<>();
+        this.uid = ID_COUNTER++;
     }
 
     public <T extends Component> T getComponent(Class<T> componentClass) {
@@ -57,6 +63,7 @@ public class GameObject {
     }
 
     public void addComponent(Component c) {
+        c.generateID();
         this.components.add(c);
         c.gameObject = this;
     }
@@ -81,5 +88,17 @@ public class GameObject {
 
     public int getzIndex() {
         return this.zIndex;
+    }
+
+    public static void init(int maxID) {
+        ID_COUNTER = maxID;
+    }
+
+    public int getUid() {
+        return this.uid;
+    }
+
+    public List<Component> getComponents() {
+        return this.components;
     }
 }

@@ -1,23 +1,21 @@
 package scenes;
 
-import components.RigidBody;
-import components.Sprite;
-import components.SpriteRenderer;
-import components.SpriteSheet;
-import core.Prefabs;
+import components.*;
+import core.*;
 import imgui.ImGui;
-import core.Camera;
-import core.GameObject;
-import core.Transform;
 import util.AssetPool;
 import imgui.ImVec2;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
+import static org.lwjgl.glfw.GLFW.*;
+
 public class Editor extends Scene {
 
     private GameObject Obj;
     private SpriteSheet sprites;
+
+    MouseControls mouseControls = new MouseControls();
 
     @Override
     public void init() {
@@ -48,6 +46,20 @@ public class Editor extends Scene {
 
     @Override
     public void update(float dt) {
+        mouseControls.update(dt);
+
+        if (KeyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
+            camera.position.x += 100 * dt;
+        } else if (KeyListener.isKeyPressed((GLFW_KEY_LEFT))) {
+            camera.position.x -= 100 * dt;
+        }
+        if (KeyListener.isKeyPressed(GLFW_KEY_UP)) {
+            camera.position.y += 100 * dt;
+        } else if (KeyListener.isKeyPressed(GLFW_KEY_DOWN)) {
+            camera.position.y -= 100 * dt;
+        }
+
+
         for (GameObject g : this.gameObjects) {
             g.update(dt);
         }
@@ -78,7 +90,7 @@ public class Editor extends Scene {
             ImGui.pushID(i);
             if (ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[0].x, texCoords[0].y, texCoords[2].x, texCoords[2].y)) {
                 GameObject object = Prefabs.generateSpriteObject(sprite, spriteWidth, spriteHeight);
-                // Attach to the mouse
+                mouseControls.pickupObject(object);
             }
             ImGui.popID();
 
