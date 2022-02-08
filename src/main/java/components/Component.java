@@ -1,5 +1,6 @@
-package core;
+package components;
 
+import core.GameObject;
 import imgui.ImGui;
 import org.joml.Vector2f;
 import org.joml.Vector3f;

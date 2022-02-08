@@ -1,6 +1,4 @@
-package core.components;
-
-import core.Component;
+package components;
 
 public class FontRenderer extends Component {
     @Override

@@ -1,4 +1,4 @@
-package core.renderer;
+package renderer;
 
 import org.lwjgl.BufferUtils;
 
@@ -12,10 +12,6 @@ public class Texture {
     private String filePath;
     private int textureID;
     private int width, height;
-
-//    public Texture(String filePath) {
-//
-//    }
 
     public void init(String filePath) {
         this.filePath = filePath;
@@ -68,6 +64,10 @@ public class Texture {
 
     public int getHeight() {
         return this.height;
+    }
+
+    public int getTextureID() {
+        return this.textureID;
     }
 
     public String getFilePath() {

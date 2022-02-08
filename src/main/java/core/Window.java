@@ -1,7 +1,8 @@
 package core;
 
-import core.scenes.Editor;
-import core.scenes.LevelScene;
+import scenes.Editor;
+import scenes.LevelScene;
+import scenes.Scene;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;

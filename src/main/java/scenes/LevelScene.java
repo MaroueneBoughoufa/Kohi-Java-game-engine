@@ -1,6 +1,4 @@
-package core.scenes;
-
-import core.Scene;
+package scenes;
 
 public class LevelScene extends Scene {
     public LevelScene() {

@@ -1,11 +1,14 @@
-package core;
+package scenes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import core.Camera;
+import core.GameObject;
+import components.Component;
 import imgui.ImGui;
-import core.renderer.Renderer;
-import core.util.ComponentAdapter;
-import core.util.GameObjectAdapter;
+import renderer.Renderer;
+import util.ComponentAdapter;
+import util.GameObjectAdapter;
 
 import java.io.FileWriter;
 import java.io.IOException;

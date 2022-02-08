@@ -1,5 +1,6 @@
 package core;
 
+import scenes.Scene;
 import imgui.*;
 import imgui.callback.ImStrConsumer;
 import imgui.callback.ImStrSupplier;

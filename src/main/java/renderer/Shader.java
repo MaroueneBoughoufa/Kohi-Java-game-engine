@@ -1,4 +1,4 @@
-package core.renderer;
+package renderer;
 
 import org.joml.*;
 import org.lwjgl.BufferUtils;

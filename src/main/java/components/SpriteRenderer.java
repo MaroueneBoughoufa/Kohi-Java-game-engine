@@ -1,9 +1,8 @@
-package core.components;
+package components;
 
 import imgui.ImGui;
-import core.Component;
 import core.Transform;
-import core.renderer.Texture;
+import renderer.Texture;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 

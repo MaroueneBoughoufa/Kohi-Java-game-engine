@@ -1,10 +1,10 @@
-package core.renderer;
+package renderer;
 
+import components.SpriteRenderer;
 import core.Window;
-import core.components.SpriteRenderer;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-import core.util.AssetPool;
+import util.AssetPool;
 
 import java.util.ArrayList;
 import java.util.List;

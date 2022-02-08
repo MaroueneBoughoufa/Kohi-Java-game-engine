@@ -1,7 +1,7 @@
-package core.renderer;
+package renderer;
 
+import components.SpriteRenderer;
 import core.GameObject;
-import core.components.SpriteRenderer;
 
 import java.util.ArrayList;
 import java.util.Collections;

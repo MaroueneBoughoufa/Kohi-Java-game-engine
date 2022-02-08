@@ -1,7 +1,7 @@
-package core.util;
+package util;
 
 import com.google.gson.*;
-import core.Component;
+import components.Component;
 import core.GameObject;
 import core.Transform;
 
