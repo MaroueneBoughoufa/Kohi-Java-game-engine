@@ -93,8 +93,8 @@ public class Editor extends Scene {
         float windowX2 = windowPos.x + windowSize.x;
         for (int i=0; i < sprites.size(); i++) {
             Sprite sprite = sprites.getSprite(i);
-            float spriteWidth = sprite.getWidth() * 4;
-            float spriteHeight = sprite.getHeight() * 4;
+            float spriteWidth = sprite.getWidth() * 2;
+            float spriteHeight = sprite.getHeight() * 2;
             int id = sprite.getTextureID();
             Vector2f[] texCoords = sprite.getTexCoords();
 
