@@ -39,7 +39,7 @@ public class DebugDraw {
         glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * Float.BYTES, 0);
         glEnableVertexAttribArray(1);
 
-        // TODO: SET LINE WIDTH
+        glLineWidth(2.0f);
     }
 
     public static void beginFrame() {

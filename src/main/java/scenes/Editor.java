@@ -25,7 +25,6 @@ public class Editor extends Scene {
 
         this.camera = new Camera(new Vector2f());
         sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
-        DebugDraw.addLine2D(new Vector2f(0, 0), new Vector2f(800, 800), new Vector3f(1, 0, 0), 300);
 
         if (levelLoaded) {
             this.activeGameObject = gameObjects.get(0);
@@ -49,19 +48,26 @@ public class Editor extends Scene {
                 new SpriteSheet(AssetPool.getTexture("assets/images/spritesheet.png"), 16, 16, 26, 0));
     }
 
+    float t = 0.0f;
+
     @Override
     public void update(float dt) {
         mouseControls.update(dt);
 
+        float x = ((float)Math.sin(t) * 200.0f) + 800;
+        float y = ((float)Math.cos(t) * 200.0f) + 600;
+        t += 0.05f;
+        DebugDraw.addLine2D(new Vector2f(800, 600), new Vector2f(x, y), new Vector3f(0, 0, 0));
+
         if (KeyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
-            camera.position.x += 100 * dt;
-        } else if (KeyListener.isKeyPressed((GLFW_KEY_LEFT))) {
-            camera.position.x -= 100 * dt;
+            camera.position.x += 200 * dt;
+        } else if (KeyListener.isKeyPressed(GLFW_KEY_LEFT)) {
+            camera.position.x -= 200 * dt;
         }
         if (KeyListener.isKeyPressed(GLFW_KEY_UP)) {
-            camera.position.y += 100 * dt;
+            camera.position.y += 200 * dt;
         } else if (KeyListener.isKeyPressed(GLFW_KEY_DOWN)) {
-            camera.position.y -= 100 * dt;
+            camera.position.y -= 200 * dt;
         }
 
 
@@ -93,7 +99,7 @@ public class Editor extends Scene {
             Vector2f[] texCoords = sprite.getTexCoords();
 
             ImGui.pushID(i);
-            if (ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[0].x, texCoords[0].y, texCoords[2].x, texCoords[2].y)) {
+            if (ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
                 GameObject object = Prefabs.generateSpriteObject(sprite, spriteWidth, spriteHeight);
                 mouseControls.pickupObject(object);
             }
