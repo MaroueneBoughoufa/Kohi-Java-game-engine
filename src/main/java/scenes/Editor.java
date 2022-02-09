@@ -3,6 +3,8 @@ package scenes;
 import components.*;
 import core.*;
 import imgui.ImGui;
+import org.joml.Vector3f;
+import renderer.DebugDraw;
 import util.AssetPool;
 import imgui.ImVec2;
 import org.joml.Vector2f;
@@ -23,6 +25,7 @@ public class Editor extends Scene {
 
         this.camera = new Camera(new Vector2f());
         sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
+        DebugDraw.addLine2D(new Vector2f(0, 0), new Vector2f(800, 800), new Vector3f(1, 0, 0), 300);
 
         if (levelLoaded) {
             this.activeGameObject = gameObjects.get(0);
@@ -36,6 +39,8 @@ public class Editor extends Scene {
         Obj.addComponent(Obj2Sprite);
         Obj.addComponent(new RigidBody());
         this.addGameObjectToScene(Obj);
+
+        this.activeGameObject = gameObjects.get(0);
     }
 
     private void loadResources() {

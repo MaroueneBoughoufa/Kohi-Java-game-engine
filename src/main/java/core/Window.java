@@ -1,5 +1,6 @@
 package core;
 
+import renderer.DebugDraw;
 import scenes.Editor;
 import scenes.LevelScene;
 import scenes.Scene;
@@ -185,7 +186,10 @@ public class Window {
             // Poll events
             glfwPollEvents();
 
+            DebugDraw.beginFrame();
+
             if (dt >= 0) {
+                DebugDraw.draw();
                 currentScene.update(dt);
             }
 
