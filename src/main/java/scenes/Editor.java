@@ -17,7 +17,7 @@ public class Editor extends Scene {
     private GameObject Obj;
     private SpriteSheet sprites;
 
-    MouseControls mouseControls = new MouseControls();
+    GameObject levelEditor = new GameObject("level editor", new Transform(new Vector2f()));
 
     @Override
     public void init() {
@@ -31,6 +31,8 @@ public class Editor extends Scene {
             return;
         }
 
+        levelEditor.addComponent(new GridLines());
+        levelEditor.addComponent(new MouseControls());
 
         Obj = new GameObject("Obj", new Transform(new Vector2f(500, 100), new Vector2f(200, 200)));
         SpriteRenderer Obj2Sprite = new SpriteRenderer();
@@ -52,7 +54,8 @@ public class Editor extends Scene {
 
     @Override
     public void update(float dt) {
-        mouseControls.update(dt);
+
+        levelEditor.update(dt);
 
         float x = ((float)Math.sin(t) * 200.0f) + 800;
         float y = ((float)Math.cos(t) * 200.0f) + 600;
@@ -101,7 +104,7 @@ public class Editor extends Scene {
             ImGui.pushID(i);
             if (ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
                 GameObject object = Prefabs.generateSpriteObject(sprite, spriteWidth, spriteHeight);
-                mouseControls.pickupObject(object);
+                levelEditor.getComponent(MouseControls.class).pickupObject(object);
             }
             ImGui.popID();
 
