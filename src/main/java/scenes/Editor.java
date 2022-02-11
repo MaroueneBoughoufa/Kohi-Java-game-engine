@@ -1,20 +1,19 @@
 package scenes;
 
-import components.*;
+import components.GridLines;
+import components.MouseControls;
+import components.Sprite;
+import components.SpriteSheet;
 import core.*;
 import imgui.ImGui;
-import org.joml.Vector3f;
-import renderer.DebugDraw;
-import util.AssetPool;
 import imgui.ImVec2;
 import org.joml.Vector2f;
-import org.joml.Vector4f;
+import util.AssetPool;
 
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Editor extends Scene {
 
-    private GameObject Obj;
     private SpriteSheet sprites;
 
     GameObject levelEditor = new GameObject("level editor", new Transform(new Vector2f()));
@@ -28,21 +27,6 @@ public class Editor extends Scene {
 
         this.camera = new Camera(new Vector2f());
         sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
-
-        if (levelLoaded) {
-            this.activeGameObject = gameObjects.get(0);
-            return;
-        }
-
-
-        Obj = new GameObject("Obj", new Transform(new Vector2f(500, 100), new Vector2f(200, 200)));
-        SpriteRenderer Obj2Sprite = new SpriteRenderer();
-        Obj2Sprite.setColor(new Vector4f(1.0f, 0.0f, 0.0f, 0.5f));
-        Obj.addComponent(Obj2Sprite);
-        Obj.addComponent(new RigidBody());
-        this.addGameObjectToScene(Obj);
-
-        this.activeGameObject = gameObjects.get(0);
     }
 
     private void loadResources() {

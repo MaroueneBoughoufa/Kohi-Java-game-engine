@@ -4,7 +4,7 @@ import core.Window;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import util.AssetPool;
-import util.JMath;
+import util.KMath;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -147,7 +147,7 @@ public class DebugDraw {
 
         if (rotation != 0.0f) {
             for (Vector2f vert : vertices) {
-                JMath.rotate(vert, rotation, center);
+                KMath.rotate(vert, rotation, center);
             }
         }
 
@@ -176,7 +176,7 @@ public class DebugDraw {
 
         for (int i=0; i < points.length; i++) {
             Vector2f tmp = new Vector2f(0, radius);
-            JMath.rotate(tmp, currentAngle, new Vector2f());
+            KMath.rotate(tmp, currentAngle, new Vector2f());
             points[i] = new Vector2f(tmp).add(center);
 
             if (i > 0) {
