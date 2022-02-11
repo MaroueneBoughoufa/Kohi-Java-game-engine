@@ -6,8 +6,8 @@ layout (location = 1) in vec3 aColor;
 
 out vec3 fColor;
 
-uniform mat4 uProjMat;
 uniform mat4 uViewMat;
+uniform mat4 uProjMat;
 
 void main()
 {
