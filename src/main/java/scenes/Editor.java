@@ -23,6 +23,9 @@ public class Editor extends Scene {
     public void init() {
         loadResources();
 
+        levelEditor.addComponent(new GridLines());
+        levelEditor.addComponent(new MouseControls());
+
         this.camera = new Camera(new Vector2f());
         sprites = AssetPool.getSpriteSheet("assets/images/spritesheet.png");
 
@@ -31,8 +34,6 @@ public class Editor extends Scene {
             return;
         }
 
-        levelEditor.addComponent(new GridLines());
-        levelEditor.addComponent(new MouseControls());
 
         Obj = new GameObject("Obj", new Transform(new Vector2f(500, 100), new Vector2f(200, 200)));
         SpriteRenderer Obj2Sprite = new SpriteRenderer();
