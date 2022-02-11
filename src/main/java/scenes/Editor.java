@@ -37,7 +37,7 @@ public class Editor extends Scene {
 
         Obj = new GameObject("Obj", new Transform(new Vector2f(500, 100), new Vector2f(200, 200)));
         SpriteRenderer Obj2Sprite = new SpriteRenderer();
-        Obj2Sprite.setColor(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f));
+        Obj2Sprite.setColor(new Vector4f(1.0f, 0.0f, 0.0f, 0.5f));
         Obj.addComponent(Obj2Sprite);
         Obj.addComponent(new RigidBody());
         this.addGameObjectToScene(Obj);
@@ -51,17 +51,10 @@ public class Editor extends Scene {
                 new SpriteSheet(AssetPool.getTexture("assets/images/spritesheet.png"), 16, 16, 26, 0));
     }
 
-    float t = 0.0f;
-
     @Override
     public void update(float dt) {
 
         levelEditor.update(dt);
-
-        float x = ((float)Math.sin(t) * 200.0f) + 800;
-        float y = ((float)Math.cos(t) * 200.0f) + 600;
-        t += 0.05f;
-        DebugDraw.addLine2D(new Vector2f(800, 600), new Vector2f(x, y), new Vector3f(0, 0, 0));
 
         if (KeyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
             camera.position.x += 200 * dt;

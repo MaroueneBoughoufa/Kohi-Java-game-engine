@@ -13,8 +13,8 @@ public class GridLines extends Component{
         Vector2f cameraPos = Window.getCurrentScene().getCamera().position;
         Vector2f projectionSize = Window.getCurrentScene().getCamera().getProjectionSize();
 
-        int firstX = ((int)cameraPos.x / Constants.GRID_WIDTH) + 2;
-        int firstY = ((int)cameraPos.y / Constants.GRID_HEIGHT) + 2;
+        int firstX = ((int)(cameraPos.x / Constants.GRID_WIDTH) - 1) * Constants.GRID_HEIGHT;
+        int firstY = ((int)(cameraPos.y / Constants.GRID_HEIGHT) - 1) * Constants.GRID_HEIGHT;
 
         int numVtLines = (int)(projectionSize.x / Constants.GRID_WIDTH) + 2;
         int numHzLines = (int)(projectionSize.y / Constants.GRID_HEIGHT) + 2;
