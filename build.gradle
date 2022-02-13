@@ -30,6 +30,12 @@ switch (OperatingSystem.current()) {
 }
 
 dependencies {
+    implementation 'org.testng:testng:7.1.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
+
+    //JUnit
+    //testImplementation('junit:junit:4.13')
+
     // ImGui
     implementation fileTree('libs') {include '*jar'}
 

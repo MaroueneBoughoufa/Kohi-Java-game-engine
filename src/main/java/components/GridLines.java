@@ -4,7 +4,9 @@ import core.Window;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import renderer.DebugDraw;
-import util.Constants;
+
+import static util.Constants.GRID_HEIGHT;
+import static util.Constants.GRID_WIDTH;
 
 public class GridLines extends Component{
 
@@ -13,20 +15,20 @@ public class GridLines extends Component{
         Vector2f cameraPos = Window.getCurrentScene().getCamera().position;
         Vector2f projectionSize = Window.getCurrentScene().getCamera().getProjectionSize();
 
-        int firstX = ((int)(cameraPos.x / Constants.GRID_WIDTH) - 1) * Constants.GRID_HEIGHT;
-        int firstY = ((int)(cameraPos.y / Constants.GRID_HEIGHT) - 1) * Constants.GRID_HEIGHT;
+        int firstX = ((int)(cameraPos.x / GRID_WIDTH) - 1) * GRID_HEIGHT;
+        int firstY = ((int)(cameraPos.y / GRID_HEIGHT) - 1) * GRID_HEIGHT;
 
-        int numVtLines = (int)(projectionSize.x / Constants.GRID_WIDTH) + 2;
-        int numHzLines = (int)(projectionSize.y / Constants.GRID_HEIGHT) + 2;
+        int numVtLines = (int)(projectionSize.x / GRID_WIDTH) + 2;
+        int numHzLines = (int)(projectionSize.y / GRID_HEIGHT) + 2;
 
-        int height = (int)projectionSize.y + Constants.GRID_HEIGHT * 2;
-        int width = (int)projectionSize.x + Constants.GRID_WIDTH * 2;
+        int height = (int)projectionSize.y + GRID_HEIGHT * 2;
+        int width = (int)projectionSize.x + GRID_WIDTH * 2;
 
         int maxLines = Math.max(numVtLines, numHzLines);
         Vector3f color = new Vector3f(0.2f, 0.2f, 0.2f);
         for (int i=0; i < maxLines; i++) {
-            int x = firstX + (Constants.GRID_WIDTH * i);
-            int y = firstY + (Constants.GRID_HEIGHT * i);
+            int x = firstX + (GRID_WIDTH * i);
+            int y = firstY + (GRID_HEIGHT * i);
 
             if (i < numVtLines) {
                 DebugDraw.addLine2D(new Vector2f(x, firstY), new Vector2f(x, firstY + height), color);

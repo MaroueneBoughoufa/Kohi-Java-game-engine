@@ -21,16 +21,16 @@ public class KMath {
         vec.y = yPrime;
     }
 
-    public static boolean compare(float x, float y, float epsilon) {
-        return Math.abs(x - y) <= epsilon * Math.max(1.0f, Math.max(Math.abs(x), Math.abs(y)));
+    public static boolean compare(float f1, float f2, float epsilon) {
+        return Math.abs(f1 - f2) <= epsilon * Math.max(1.0f, Math.max(Math.abs(f1), Math.abs(f2)));
     }
 
     public static boolean compare(Vector2f vec1, Vector2f vec2, float epsilon) {
         return compare(vec1.x, vec2.x, epsilon) && compare(vec1.y, vec2.y, epsilon);
     }
 
-    public static boolean compare(float x, float y) {
-        return Math.abs(x - y) <= Float.MIN_VALUE * Math.max(1.0f, Math.max(Math.abs(x), Math.abs(y)));
+    public static boolean compare(float f1, float f2) {
+        return Math.abs(f1 - f2) <= Float.MIN_VALUE * Math.max(1.0f, Math.max(Math.abs(f1), Math.abs(f2)));
     }
 
     public static boolean compare(Vector2f vec1, Vector2f vec2) {

@@ -8,6 +8,8 @@ import core.*;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
+import renderer.DebugDraw;
 import util.AssetPool;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -35,10 +37,16 @@ public class Editor extends Scene {
                 new SpriteSheet(AssetPool.getTexture("assets/images/spritesheet.png"), 16, 16, 26, 0));
     }
 
+    float angle = 30.0f;
+
     @Override
     public void update(float dt) {
 
         levelEditor.update(dt);
+        DebugDraw.addBox2D(new Vector2f(300, 200), new Vector2f(64, 32), angle, new Vector3f(0, 1, 0), 1);
+        DebugDraw.addCircle(new Vector2f(400, 300), 64, new Vector3f(1, 0, 0));
+
+        angle += 20.0f * dt;
 
         if (KeyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
             camera.position.x += 200 * dt;

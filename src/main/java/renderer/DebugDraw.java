@@ -37,7 +37,7 @@ public class DebugDraw {
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 6 * Float.BYTES, 0);
         glEnableVertexAttribArray(0);
 
-        glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * Float.BYTES, 0);
+        glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * Float.BYTES, 3 * Float.BYTES);
         glEnableVertexAttribArray(1);
 
         glLineWidth(2.0f);
@@ -123,6 +123,7 @@ public class DebugDraw {
         if (lines.size() >= MAX_LINES) return;
         DebugDraw.lines.add(new Line2D(start, end, color, lifeTime));
     }
+
     // ==================================================
     // Add Box2D methods
     // ==================================================
@@ -135,8 +136,7 @@ public class DebugDraw {
         addBox2D(center, dimensions, rotation, color, 1);
     }
 
-    public static void addBox2D(Vector2f center, Vector2f dimensions, float rotation,
-                                Vector3f color, int lifetime) {
+    public static void addBox2D(Vector2f center, Vector2f dimensions, float rotation, Vector3f color, int lifetime) {
         Vector2f min = new Vector2f(center).sub(new Vector2f(dimensions).mul(0.5f));
         Vector2f max = new Vector2f(center).add(new Vector2f(dimensions).mul(0.5f));
 
