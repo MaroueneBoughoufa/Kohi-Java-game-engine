@@ -8,11 +8,12 @@ import core.*;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
-import org.joml.Vector3f;
 import renderer.DebugDraw;
 import util.AssetPool;
 
 import static org.lwjgl.glfw.GLFW.*;
+import static util.constants.Color3.BLUE;
+import static util.constants.Color3.RED;
 
 public class Editor extends Scene {
 
@@ -43,8 +44,8 @@ public class Editor extends Scene {
     public void update(float dt) {
 
         levelEditor.update(dt);
-        DebugDraw.addBox2D(new Vector2f(300, 200), new Vector2f(64, 32), angle, new Vector3f(0, 1, 0), 1);
-        DebugDraw.addCircle(new Vector2f(400, 300), 64, new Vector3f(1, 0, 0));
+        DebugDraw.addBox2D(new Vector2f(300, 200), new Vector2f(64, 32), angle, RED, 1);
+        DebugDraw.addCircle(new Vector2f(400, 300), 64, BLUE, 1);
 
         angle += 20.0f * dt;
 

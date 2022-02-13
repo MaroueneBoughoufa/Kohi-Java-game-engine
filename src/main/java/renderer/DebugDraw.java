@@ -14,6 +14,7 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
+import static util.constants.Color3.*;
 
 public class DebugDraw {
     private static int MAX_LINES = 500;
@@ -111,8 +112,7 @@ public class DebugDraw {
     // Add line2D methods
     // ============================================
     public static void addLine2D(Vector2f start, Vector2f end) {
-        // TODO: ADD CONSTANTS FOR LINE COLORS
-        addLine2D(start, end, new Vector3f(0, 1, 0), 1);
+        addLine2D(start, end, GREEN, 1);
     }
 
     public static void addLine2D(Vector2f start, Vector2f end, Vector3f color) {
@@ -128,8 +128,7 @@ public class DebugDraw {
     // Add Box2D methods
     // ==================================================
     public static void addBox2D(Vector2f center, Vector2f dimensions, float rotation) {
-        // TODO: ADD CONSTANTS FOR COMMON COLORS
-        addBox2D(center, dimensions, rotation, new Vector3f(0, 1, 0), 1);
+        addBox2D(center, dimensions, rotation, GREEN, 1);
     }
 
     public static void addBox2D(Vector2f center, Vector2f dimensions, float rotation, Vector3f color) {
@@ -161,8 +160,7 @@ public class DebugDraw {
     // Add Circle methods
     // ==================================================
     public static void addCircle(Vector2f center, float radius) {
-        // TODO: ADD CONSTANTS FOR COMMON COLORS
-        addCircle(center, radius, new Vector3f(0, 1, 0), 1);
+        addCircle(center, radius, GREEN, 1);
     }
 
     public static void addCircle(Vector2f center, float radius, Vector3f color) {

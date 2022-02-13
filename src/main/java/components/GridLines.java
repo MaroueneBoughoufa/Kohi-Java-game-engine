@@ -5,8 +5,8 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 import renderer.DebugDraw;
 
-import static util.Constants.GRID_HEIGHT;
-import static util.Constants.GRID_WIDTH;
+import static util.constants.Settings.GRID_HEIGHT;
+import static util.constants.Settings.GRID_WIDTH;
 
 public class GridLines extends Component{
 
